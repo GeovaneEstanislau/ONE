@@ -1,0 +1,27 @@
+// Função para embaralhar os participantes
+function embaralhar(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// Função para sortear o amigo secreto
+function sortearAmigoSecreto(participantes) {
+    let sorteio = {};
+    let embaralhado = [...participantes];
+    do {
+        embaralhar(embaralhado);
+    } while (embaralhado.some((nome, i) => nome === participantes[i]));
+    
+    participantes.forEach((nome, i) => {
+        sorteio[nome] = embaralhado[i];
+    });
+    
+    return sorteio;
+}
+
+// Exemplo de uso
+const participantes = ["Ana", "Carlos", "Mariana", "José", "Beatriz"];
+const resultado = sortearAmigoSecreto(participantes);
+console.log(resultado);
